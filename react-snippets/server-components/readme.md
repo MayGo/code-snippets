@@ -1,18 +1,16 @@
-🚀 𝗔𝘂𝘁𝗼-𝗠𝗲𝗺𝗼𝗶𝘇𝗮𝘁𝗶𝗼𝗻 𝗶𝗻 𝗥𝗲𝗮𝗰𝘁 𝗖𝗼𝗺𝗽𝗶𝗹𝗲𝗿: 𝗟𝗲𝘀𝘀 𝗖𝗼𝗱𝗲, 𝗠𝗼𝗿𝗲 𝗣𝗲𝗿𝗳𝗼𝗿𝗺𝗮𝗻𝗰𝗲
+🚀 𝗥𝗲𝗮𝗰𝘁 𝗦𝗲𝗿𝘃𝗲𝗿 𝗖𝗼𝗺𝗽𝗼𝗻𝗲𝗻𝘁𝘀: 𝗙𝗮𝘀𝘁𝗲𝗿 𝗟𝗼𝗮𝗱𝘀 & 𝗦𝗶𝗺𝗽𝗹𝗲𝗿 𝗖𝗼𝗱𝗲
 
-𝗣𝗿𝗼𝗯𝗹𝗲𝗺: Manually optimizing with useMemo & useCallback leads to bloated code and hidden bugs.
+𝗣𝗿𝗼𝗯𝗹𝗲𝗺: Client-side data fetching leads to loading states and client-side JavaScript overhead
 
-𝗦𝗼𝗹𝘂𝘁𝗶𝗼𝗻: React Compiler optimizes automatically!
+𝗦𝗼𝗹𝘂𝘁𝗶𝗼𝗻: Server Components execute on the server during render 🖥️⚡
 
-𝗕𝗲𝗳𝗼𝗿𝗲: Manual memoization everywhere 😵‍💫
+𝗕𝗲𝗳𝗼𝗿𝗲: Client-side fetching with useEffect 😓
+𝗔𝗳𝘁𝗲𝗿: Server-side data fetching in component 🤯✨
 
-𝗔𝗳𝘁𝗲𝗿: Auto-memoization does the work 🎩✨ (𝘚𝘦𝘦 𝘪𝘮𝘢𝘨𝘦𝘴 𝘧𝘰𝘳 𝘵𝘩𝘦 𝘤𝘰𝘥𝘦)
-
-✅ 𝗟𝗲𝘀𝘀 𝗕𝗼𝗶𝗹𝗲𝗿𝗽𝗹𝗮𝘁𝗲 - No more overused useMemo & useCallback
-
-✅ 𝗦𝗺𝗮𝗿𝘁𝗲𝗿 𝗗𝗲𝗽𝗲𝗻𝗱𝗲𝗻𝗰𝘆 𝗧𝗿𝗮𝗰𝗸𝗶𝗻𝗴 - React Compiler handles dependencies for you
-
-✅ 𝗕𝗲𝘁𝘁𝗲𝗿 𝗥𝗲𝗮𝗱𝗮𝗯𝗶𝗹𝗶𝘁𝘆 & 𝗠𝗮𝗶𝗻𝘁𝗮𝗶𝗻𝗮𝗯𝗶𝗹𝗶𝘁𝘆
+✅ 𝗡𝗼 𝗖𝗹𝗶𝗲𝗻𝘁-𝗦𝗶𝗱𝗲 𝗟𝗼𝗮𝗱𝗶𝗻𝗴 - Data fetched before component renders
+✅ 𝗦𝗺𝗮𝗹𝗹𝗲𝗿 𝗖𝗹𝗶𝗲𝗻𝘁 𝗕𝘂𝗻𝗱𝗹𝗲 - Logic stays on server
 
 ![Before](./before.jsx.png)
 ![After](./after.jsx.png)
+
+ℹ️ Requires React Server Components support (Next.js 13+)

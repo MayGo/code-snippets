@@ -1,7 +1,6 @@
-// Before: Client-side data fetching
 import { useEffect, useState } from 'react';
 
-function BlogPost({ postId }) {
+export default function BlogPost({ postId }) {
     const [post, setPost] = useState(null);
 
     useEffect(() => {
@@ -13,6 +12,7 @@ function BlogPost({ postId }) {
         fetchPost();
     }, [postId]);
 
-    if (!post) return <p>Loading...</p>;
+    if (!post) return <PostSkeleton />;
+
     return <div>{post.content}</div>;
 }
