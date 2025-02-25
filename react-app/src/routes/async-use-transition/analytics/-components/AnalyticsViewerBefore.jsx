@@ -19,7 +19,13 @@ function AnalyticsViewerTemp() {
 
     return (
         <section>
-            <button onClick={handleAnalyze} disabled={isPending}>
+            <button
+                onClick={handleAnalyze}
+                disabled={isPending}
+                className={`px-4 py-2 rounded-md font-medium ${
+                    isPending ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600 text-white'
+                }`}
+            >
                 {isPending ? 'Generating...' : 'Run Report'}
             </button>
             {report && <ExpensiveChart data={report} dimmed={isPending} />}

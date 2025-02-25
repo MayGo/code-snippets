@@ -27,7 +27,7 @@ npm run test
 
 ## Styling
 
-This project uses CSS for styling.
+This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
 
 
 

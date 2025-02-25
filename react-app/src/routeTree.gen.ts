@@ -17,6 +17,8 @@ import { Route as AsyncUseTransitionTabsIndexImport } from './routes/async-use-t
 import { Route as AsyncUseTransitionAnalyticsIndexImport } from './routes/async-use-transition/analytics/index'
 import { Route as AsyncUseTransitionTabsBeforeImport } from './routes/async-use-transition/tabs/before'
 import { Route as AsyncUseTransitionTabsAfterImport } from './routes/async-use-transition/tabs/after'
+import { Route as AsyncUseTransitionAnalyticsBeforeImport } from './routes/async-use-transition/analytics/before'
+import { Route as AsyncUseTransitionAnalyticsAfterImport } from './routes/async-use-transition/analytics/after'
 
 // Create/Update Routes
 
@@ -60,6 +62,20 @@ const AsyncUseTransitionTabsAfterRoute =
     getParentRoute: () => rootRoute,
   } as any)
 
+const AsyncUseTransitionAnalyticsBeforeRoute =
+  AsyncUseTransitionAnalyticsBeforeImport.update({
+    id: '/async-use-transition/analytics/before',
+    path: '/async-use-transition/analytics/before',
+    getParentRoute: () => rootRoute,
+  } as any)
+
+const AsyncUseTransitionAnalyticsAfterRoute =
+  AsyncUseTransitionAnalyticsAfterImport.update({
+    id: '/async-use-transition/analytics/after',
+    path: '/async-use-transition/analytics/after',
+    getParentRoute: () => rootRoute,
+  } as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -76,6 +92,20 @@ declare module '@tanstack/react-router' {
       path: '/async-use-transition'
       fullPath: '/async-use-transition'
       preLoaderRoute: typeof AsyncUseTransitionIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/async-use-transition/analytics/after': {
+      id: '/async-use-transition/analytics/after'
+      path: '/async-use-transition/analytics/after'
+      fullPath: '/async-use-transition/analytics/after'
+      preLoaderRoute: typeof AsyncUseTransitionAnalyticsAfterImport
+      parentRoute: typeof rootRoute
+    }
+    '/async-use-transition/analytics/before': {
+      id: '/async-use-transition/analytics/before'
+      path: '/async-use-transition/analytics/before'
+      fullPath: '/async-use-transition/analytics/before'
+      preLoaderRoute: typeof AsyncUseTransitionAnalyticsBeforeImport
       parentRoute: typeof rootRoute
     }
     '/async-use-transition/tabs/after': {
@@ -114,6 +144,8 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/async-use-transition': typeof AsyncUseTransitionIndexRoute
+  '/async-use-transition/analytics/after': typeof AsyncUseTransitionAnalyticsAfterRoute
+  '/async-use-transition/analytics/before': typeof AsyncUseTransitionAnalyticsBeforeRoute
   '/async-use-transition/tabs/after': typeof AsyncUseTransitionTabsAfterRoute
   '/async-use-transition/tabs/before': typeof AsyncUseTransitionTabsBeforeRoute
   '/async-use-transition/analytics': typeof AsyncUseTransitionAnalyticsIndexRoute
@@ -123,6 +155,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/async-use-transition': typeof AsyncUseTransitionIndexRoute
+  '/async-use-transition/analytics/after': typeof AsyncUseTransitionAnalyticsAfterRoute
+  '/async-use-transition/analytics/before': typeof AsyncUseTransitionAnalyticsBeforeRoute
   '/async-use-transition/tabs/after': typeof AsyncUseTransitionTabsAfterRoute
   '/async-use-transition/tabs/before': typeof AsyncUseTransitionTabsBeforeRoute
   '/async-use-transition/analytics': typeof AsyncUseTransitionAnalyticsIndexRoute
@@ -133,6 +167,8 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/async-use-transition/': typeof AsyncUseTransitionIndexRoute
+  '/async-use-transition/analytics/after': typeof AsyncUseTransitionAnalyticsAfterRoute
+  '/async-use-transition/analytics/before': typeof AsyncUseTransitionAnalyticsBeforeRoute
   '/async-use-transition/tabs/after': typeof AsyncUseTransitionTabsAfterRoute
   '/async-use-transition/tabs/before': typeof AsyncUseTransitionTabsBeforeRoute
   '/async-use-transition/analytics/': typeof AsyncUseTransitionAnalyticsIndexRoute
@@ -144,6 +180,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/async-use-transition'
+    | '/async-use-transition/analytics/after'
+    | '/async-use-transition/analytics/before'
     | '/async-use-transition/tabs/after'
     | '/async-use-transition/tabs/before'
     | '/async-use-transition/analytics'
@@ -152,6 +190,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/async-use-transition'
+    | '/async-use-transition/analytics/after'
+    | '/async-use-transition/analytics/before'
     | '/async-use-transition/tabs/after'
     | '/async-use-transition/tabs/before'
     | '/async-use-transition/analytics'
@@ -160,6 +200,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/async-use-transition/'
+    | '/async-use-transition/analytics/after'
+    | '/async-use-transition/analytics/before'
     | '/async-use-transition/tabs/after'
     | '/async-use-transition/tabs/before'
     | '/async-use-transition/analytics/'
@@ -170,6 +212,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AsyncUseTransitionIndexRoute: typeof AsyncUseTransitionIndexRoute
+  AsyncUseTransitionAnalyticsAfterRoute: typeof AsyncUseTransitionAnalyticsAfterRoute
+  AsyncUseTransitionAnalyticsBeforeRoute: typeof AsyncUseTransitionAnalyticsBeforeRoute
   AsyncUseTransitionTabsAfterRoute: typeof AsyncUseTransitionTabsAfterRoute
   AsyncUseTransitionTabsBeforeRoute: typeof AsyncUseTransitionTabsBeforeRoute
   AsyncUseTransitionAnalyticsIndexRoute: typeof AsyncUseTransitionAnalyticsIndexRoute
@@ -179,6 +223,9 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AsyncUseTransitionIndexRoute: AsyncUseTransitionIndexRoute,
+  AsyncUseTransitionAnalyticsAfterRoute: AsyncUseTransitionAnalyticsAfterRoute,
+  AsyncUseTransitionAnalyticsBeforeRoute:
+    AsyncUseTransitionAnalyticsBeforeRoute,
   AsyncUseTransitionTabsAfterRoute: AsyncUseTransitionTabsAfterRoute,
   AsyncUseTransitionTabsBeforeRoute: AsyncUseTransitionTabsBeforeRoute,
   AsyncUseTransitionAnalyticsIndexRoute: AsyncUseTransitionAnalyticsIndexRoute,
@@ -197,6 +244,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/async-use-transition/",
+        "/async-use-transition/analytics/after",
+        "/async-use-transition/analytics/before",
         "/async-use-transition/tabs/after",
         "/async-use-transition/tabs/before",
         "/async-use-transition/analytics/",
@@ -208,6 +257,12 @@ export const routeTree = rootRoute
     },
     "/async-use-transition/": {
       "filePath": "async-use-transition/index.tsx"
+    },
+    "/async-use-transition/analytics/after": {
+      "filePath": "async-use-transition/analytics/after.tsx"
+    },
+    "/async-use-transition/analytics/before": {
+      "filePath": "async-use-transition/analytics/before.tsx"
     },
     "/async-use-transition/tabs/after": {
       "filePath": "async-use-transition/tabs/after.tsx"
