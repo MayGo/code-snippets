@@ -1,5 +1,5 @@
 import { memo, useState } from 'react';
-import { ExpensiveChart } from '../ExpensiveChart';
+import { ExpensiveChart } from './ExpensiveChart';
 import { fetchData, processAnalytics } from './async-use-transition.utils';
 
 function AnalyticsViewerTemp() {
