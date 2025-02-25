@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Suspense, use } from 'react';
-import { BackButton } from '../../components/BackButton';
+import { Layout } from '../../components/Layout';
 
 // Define the Todo type to fix type errors
 interface Todo {
@@ -41,13 +41,14 @@ function TodoDetail() {
 // Main component with Suspense boundary
 function AfterComponent() {
     return (
-        <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+        <Layout
+            title="After use hook"
+            description="Direct promise consumption with automatic cleanup."
+            showBackButton={true}
+        >
             <Suspense fallback={<div>Loading...</div>}>
                 <TodoDetail />
             </Suspense>
-            <div className="mt-6">
-                <BackButton />
-            </div>
-        </div>
+        </Layout>
     );
 }

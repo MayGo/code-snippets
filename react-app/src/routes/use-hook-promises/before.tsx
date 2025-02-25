@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
-import { BackButton } from '../../components/BackButton';
+import { Layout } from '../../components/Layout';
 
 // Define the Todo type to fix type errors
 interface Todo {
@@ -51,7 +51,11 @@ function BeforeComponent() {
     if (error) return <div>Error: {error.message}</div>;
 
     return (
-        <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+        <Layout
+            title="Before useHook"
+            description="UI blocked by async waterfalls. Manual race condition prevention. "
+            showBackButton={true}
+        >
             <h2 className="text-2xl font-bold mb-4">Todo Item (Before)</h2>
             <p className="mb-2">
                 <strong>Title:</strong> {data?.title}
@@ -59,9 +63,6 @@ function BeforeComponent() {
             <p className="mb-4">
                 <strong>Completed:</strong> {data?.completed ? 'Yes' : 'No'}
             </p>
-            <div className="mt-6">
-                <BackButton />
-            </div>
-        </div>
+        </Layout>
     );
 }
