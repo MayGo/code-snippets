@@ -12,7 +12,10 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as UseHookPromisesIndexImport } from './routes/use-hook-promises/index'
 import { Route as AsyncUseTransitionIndexImport } from './routes/async-use-transition/index'
+import { Route as UseHookPromisesBeforeImport } from './routes/use-hook-promises/before'
+import { Route as UseHookPromisesAfterImport } from './routes/use-hook-promises/after'
 import { Route as AsyncUseTransitionTabsIndexImport } from './routes/async-use-transition/tabs/index'
 import { Route as AsyncUseTransitionAnalyticsIndexImport } from './routes/async-use-transition/analytics/index'
 import { Route as AsyncUseTransitionTabsBeforeImport } from './routes/async-use-transition/tabs/before'
@@ -28,9 +31,27 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const UseHookPromisesIndexRoute = UseHookPromisesIndexImport.update({
+  id: '/use-hook-promises/',
+  path: '/use-hook-promises/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const AsyncUseTransitionIndexRoute = AsyncUseTransitionIndexImport.update({
   id: '/async-use-transition/',
   path: '/async-use-transition/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const UseHookPromisesBeforeRoute = UseHookPromisesBeforeImport.update({
+  id: '/use-hook-promises/before',
+  path: '/use-hook-promises/before',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const UseHookPromisesAfterRoute = UseHookPromisesAfterImport.update({
+  id: '/use-hook-promises/after',
+  path: '/use-hook-promises/after',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -87,11 +108,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/use-hook-promises/after': {
+      id: '/use-hook-promises/after'
+      path: '/use-hook-promises/after'
+      fullPath: '/use-hook-promises/after'
+      preLoaderRoute: typeof UseHookPromisesAfterImport
+      parentRoute: typeof rootRoute
+    }
+    '/use-hook-promises/before': {
+      id: '/use-hook-promises/before'
+      path: '/use-hook-promises/before'
+      fullPath: '/use-hook-promises/before'
+      preLoaderRoute: typeof UseHookPromisesBeforeImport
+      parentRoute: typeof rootRoute
+    }
     '/async-use-transition/': {
       id: '/async-use-transition/'
       path: '/async-use-transition'
       fullPath: '/async-use-transition'
       preLoaderRoute: typeof AsyncUseTransitionIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/use-hook-promises/': {
+      id: '/use-hook-promises/'
+      path: '/use-hook-promises'
+      fullPath: '/use-hook-promises'
+      preLoaderRoute: typeof UseHookPromisesIndexImport
       parentRoute: typeof rootRoute
     }
     '/async-use-transition/analytics/after': {
@@ -143,7 +185,10 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/use-hook-promises/after': typeof UseHookPromisesAfterRoute
+  '/use-hook-promises/before': typeof UseHookPromisesBeforeRoute
   '/async-use-transition': typeof AsyncUseTransitionIndexRoute
+  '/use-hook-promises': typeof UseHookPromisesIndexRoute
   '/async-use-transition/analytics/after': typeof AsyncUseTransitionAnalyticsAfterRoute
   '/async-use-transition/analytics/before': typeof AsyncUseTransitionAnalyticsBeforeRoute
   '/async-use-transition/tabs/after': typeof AsyncUseTransitionTabsAfterRoute
@@ -154,7 +199,10 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/use-hook-promises/after': typeof UseHookPromisesAfterRoute
+  '/use-hook-promises/before': typeof UseHookPromisesBeforeRoute
   '/async-use-transition': typeof AsyncUseTransitionIndexRoute
+  '/use-hook-promises': typeof UseHookPromisesIndexRoute
   '/async-use-transition/analytics/after': typeof AsyncUseTransitionAnalyticsAfterRoute
   '/async-use-transition/analytics/before': typeof AsyncUseTransitionAnalyticsBeforeRoute
   '/async-use-transition/tabs/after': typeof AsyncUseTransitionTabsAfterRoute
@@ -166,7 +214,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/use-hook-promises/after': typeof UseHookPromisesAfterRoute
+  '/use-hook-promises/before': typeof UseHookPromisesBeforeRoute
   '/async-use-transition/': typeof AsyncUseTransitionIndexRoute
+  '/use-hook-promises/': typeof UseHookPromisesIndexRoute
   '/async-use-transition/analytics/after': typeof AsyncUseTransitionAnalyticsAfterRoute
   '/async-use-transition/analytics/before': typeof AsyncUseTransitionAnalyticsBeforeRoute
   '/async-use-transition/tabs/after': typeof AsyncUseTransitionTabsAfterRoute
@@ -179,7 +230,10 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/use-hook-promises/after'
+    | '/use-hook-promises/before'
     | '/async-use-transition'
+    | '/use-hook-promises'
     | '/async-use-transition/analytics/after'
     | '/async-use-transition/analytics/before'
     | '/async-use-transition/tabs/after'
@@ -189,7 +243,10 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/use-hook-promises/after'
+    | '/use-hook-promises/before'
     | '/async-use-transition'
+    | '/use-hook-promises'
     | '/async-use-transition/analytics/after'
     | '/async-use-transition/analytics/before'
     | '/async-use-transition/tabs/after'
@@ -199,7 +256,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/use-hook-promises/after'
+    | '/use-hook-promises/before'
     | '/async-use-transition/'
+    | '/use-hook-promises/'
     | '/async-use-transition/analytics/after'
     | '/async-use-transition/analytics/before'
     | '/async-use-transition/tabs/after'
@@ -211,7 +271,10 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  UseHookPromisesAfterRoute: typeof UseHookPromisesAfterRoute
+  UseHookPromisesBeforeRoute: typeof UseHookPromisesBeforeRoute
   AsyncUseTransitionIndexRoute: typeof AsyncUseTransitionIndexRoute
+  UseHookPromisesIndexRoute: typeof UseHookPromisesIndexRoute
   AsyncUseTransitionAnalyticsAfterRoute: typeof AsyncUseTransitionAnalyticsAfterRoute
   AsyncUseTransitionAnalyticsBeforeRoute: typeof AsyncUseTransitionAnalyticsBeforeRoute
   AsyncUseTransitionTabsAfterRoute: typeof AsyncUseTransitionTabsAfterRoute
@@ -222,7 +285,10 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  UseHookPromisesAfterRoute: UseHookPromisesAfterRoute,
+  UseHookPromisesBeforeRoute: UseHookPromisesBeforeRoute,
   AsyncUseTransitionIndexRoute: AsyncUseTransitionIndexRoute,
+  UseHookPromisesIndexRoute: UseHookPromisesIndexRoute,
   AsyncUseTransitionAnalyticsAfterRoute: AsyncUseTransitionAnalyticsAfterRoute,
   AsyncUseTransitionAnalyticsBeforeRoute:
     AsyncUseTransitionAnalyticsBeforeRoute,
@@ -243,7 +309,10 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/use-hook-promises/after",
+        "/use-hook-promises/before",
         "/async-use-transition/",
+        "/use-hook-promises/",
         "/async-use-transition/analytics/after",
         "/async-use-transition/analytics/before",
         "/async-use-transition/tabs/after",
@@ -255,8 +324,17 @@ export const routeTree = rootRoute
     "/": {
       "filePath": "index.tsx"
     },
+    "/use-hook-promises/after": {
+      "filePath": "use-hook-promises/after.tsx"
+    },
+    "/use-hook-promises/before": {
+      "filePath": "use-hook-promises/before.tsx"
+    },
     "/async-use-transition/": {
       "filePath": "async-use-transition/index.tsx"
+    },
+    "/use-hook-promises/": {
+      "filePath": "use-hook-promises/index.tsx"
     },
     "/async-use-transition/analytics/after": {
       "filePath": "async-use-transition/analytics/after.tsx"
