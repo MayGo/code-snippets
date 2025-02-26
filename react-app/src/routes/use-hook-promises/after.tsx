@@ -27,7 +27,7 @@ function TodoDetail() {
 
     console.log('TodoDetail render....');
 
-    return <TodoItem title={data.title} completed={data.completed} />;
+    return <TodoItem data={data} />;
 }
 
 // Main component with Suspense boundary

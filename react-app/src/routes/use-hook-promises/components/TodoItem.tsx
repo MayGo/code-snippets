@@ -1,4 +1,7 @@
-export function TodoItem({ title, completed }: { title: string; completed: boolean }) {
+import type { Todo } from './todo.utils';
+
+export function TodoItem({ data = { title: '', completed: false, userId: 0, id: 0 } }: { data?: Todo }) {
+    const { title, completed } = data;
     console.log('TodoItem render....');
     return (
         <div className="bg-white shadow-md rounded-lg p-4 mb-4">

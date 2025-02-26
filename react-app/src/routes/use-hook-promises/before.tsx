@@ -2,23 +2,16 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 import { Layout } from '../../components/Layout';
 import { TodoItem } from './components/TodoItem';
-
-// Define the Todo type to fix type errors
-interface Todo {
-    userId: number;
-    id: number;
-    title: string;
-    completed: boolean;
-}
+import type { Todo } from './components/todo.utils';
 
 export const Route = createFileRoute('/use-hook-promises/before')({
     component: BeforeComponent
 });
 
 function BeforeComponent() {
-    const [data, setData] = useState<Todo | null>(null);
+    const [data, setData] = useState<Todo>();
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<Error | null>(null);
+    const [error, setError] = useState<Error>();
 
     console.log('BeforeComponent render....');
 
@@ -59,7 +52,7 @@ function BeforeComponent() {
             description="UI blocked by async waterfalls. Manual race condition prevention. "
             showBackButton={true}
         >
-            <TodoItem title={data?.title} completed={data?.completed} />
+            <TodoItem data={data} />
         </Layout>
     );
 }

@@ -13,9 +13,12 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as UseHookPromisesIndexImport } from './routes/use-hook-promises/index'
+import { Route as FormActionsIndexImport } from './routes/form-actions/index'
 import { Route as AsyncUseTransitionIndexImport } from './routes/async-use-transition/index'
 import { Route as UseHookPromisesBeforeImport } from './routes/use-hook-promises/before'
 import { Route as UseHookPromisesAfterImport } from './routes/use-hook-promises/after'
+import { Route as FormActionsBeforeImport } from './routes/form-actions/before'
+import { Route as FormActionsAfterImport } from './routes/form-actions/after'
 import { Route as AsyncUseTransitionTabsIndexImport } from './routes/async-use-transition/tabs/index'
 import { Route as AsyncUseTransitionAnalyticsIndexImport } from './routes/async-use-transition/analytics/index'
 import { Route as AsyncUseTransitionTabsBeforeImport } from './routes/async-use-transition/tabs/before'
@@ -37,6 +40,12 @@ const UseHookPromisesIndexRoute = UseHookPromisesIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const FormActionsIndexRoute = FormActionsIndexImport.update({
+  id: '/form-actions/',
+  path: '/form-actions/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const AsyncUseTransitionIndexRoute = AsyncUseTransitionIndexImport.update({
   id: '/async-use-transition/',
   path: '/async-use-transition/',
@@ -52,6 +61,18 @@ const UseHookPromisesBeforeRoute = UseHookPromisesBeforeImport.update({
 const UseHookPromisesAfterRoute = UseHookPromisesAfterImport.update({
   id: '/use-hook-promises/after',
   path: '/use-hook-promises/after',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FormActionsBeforeRoute = FormActionsBeforeImport.update({
+  id: '/form-actions/before',
+  path: '/form-actions/before',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FormActionsAfterRoute = FormActionsAfterImport.update({
+  id: '/form-actions/after',
+  path: '/form-actions/after',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -108,6 +129,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/form-actions/after': {
+      id: '/form-actions/after'
+      path: '/form-actions/after'
+      fullPath: '/form-actions/after'
+      preLoaderRoute: typeof FormActionsAfterImport
+      parentRoute: typeof rootRoute
+    }
+    '/form-actions/before': {
+      id: '/form-actions/before'
+      path: '/form-actions/before'
+      fullPath: '/form-actions/before'
+      preLoaderRoute: typeof FormActionsBeforeImport
+      parentRoute: typeof rootRoute
+    }
     '/use-hook-promises/after': {
       id: '/use-hook-promises/after'
       path: '/use-hook-promises/after'
@@ -127,6 +162,13 @@ declare module '@tanstack/react-router' {
       path: '/async-use-transition'
       fullPath: '/async-use-transition'
       preLoaderRoute: typeof AsyncUseTransitionIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/form-actions/': {
+      id: '/form-actions/'
+      path: '/form-actions'
+      fullPath: '/form-actions'
+      preLoaderRoute: typeof FormActionsIndexImport
       parentRoute: typeof rootRoute
     }
     '/use-hook-promises/': {
@@ -185,9 +227,12 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/form-actions/after': typeof FormActionsAfterRoute
+  '/form-actions/before': typeof FormActionsBeforeRoute
   '/use-hook-promises/after': typeof UseHookPromisesAfterRoute
   '/use-hook-promises/before': typeof UseHookPromisesBeforeRoute
   '/async-use-transition': typeof AsyncUseTransitionIndexRoute
+  '/form-actions': typeof FormActionsIndexRoute
   '/use-hook-promises': typeof UseHookPromisesIndexRoute
   '/async-use-transition/analytics/after': typeof AsyncUseTransitionAnalyticsAfterRoute
   '/async-use-transition/analytics/before': typeof AsyncUseTransitionAnalyticsBeforeRoute
@@ -199,9 +244,12 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/form-actions/after': typeof FormActionsAfterRoute
+  '/form-actions/before': typeof FormActionsBeforeRoute
   '/use-hook-promises/after': typeof UseHookPromisesAfterRoute
   '/use-hook-promises/before': typeof UseHookPromisesBeforeRoute
   '/async-use-transition': typeof AsyncUseTransitionIndexRoute
+  '/form-actions': typeof FormActionsIndexRoute
   '/use-hook-promises': typeof UseHookPromisesIndexRoute
   '/async-use-transition/analytics/after': typeof AsyncUseTransitionAnalyticsAfterRoute
   '/async-use-transition/analytics/before': typeof AsyncUseTransitionAnalyticsBeforeRoute
@@ -214,9 +262,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/form-actions/after': typeof FormActionsAfterRoute
+  '/form-actions/before': typeof FormActionsBeforeRoute
   '/use-hook-promises/after': typeof UseHookPromisesAfterRoute
   '/use-hook-promises/before': typeof UseHookPromisesBeforeRoute
   '/async-use-transition/': typeof AsyncUseTransitionIndexRoute
+  '/form-actions/': typeof FormActionsIndexRoute
   '/use-hook-promises/': typeof UseHookPromisesIndexRoute
   '/async-use-transition/analytics/after': typeof AsyncUseTransitionAnalyticsAfterRoute
   '/async-use-transition/analytics/before': typeof AsyncUseTransitionAnalyticsBeforeRoute
@@ -230,9 +281,12 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/form-actions/after'
+    | '/form-actions/before'
     | '/use-hook-promises/after'
     | '/use-hook-promises/before'
     | '/async-use-transition'
+    | '/form-actions'
     | '/use-hook-promises'
     | '/async-use-transition/analytics/after'
     | '/async-use-transition/analytics/before'
@@ -243,9 +297,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/form-actions/after'
+    | '/form-actions/before'
     | '/use-hook-promises/after'
     | '/use-hook-promises/before'
     | '/async-use-transition'
+    | '/form-actions'
     | '/use-hook-promises'
     | '/async-use-transition/analytics/after'
     | '/async-use-transition/analytics/before'
@@ -256,9 +313,12 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/form-actions/after'
+    | '/form-actions/before'
     | '/use-hook-promises/after'
     | '/use-hook-promises/before'
     | '/async-use-transition/'
+    | '/form-actions/'
     | '/use-hook-promises/'
     | '/async-use-transition/analytics/after'
     | '/async-use-transition/analytics/before'
@@ -271,9 +331,12 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FormActionsAfterRoute: typeof FormActionsAfterRoute
+  FormActionsBeforeRoute: typeof FormActionsBeforeRoute
   UseHookPromisesAfterRoute: typeof UseHookPromisesAfterRoute
   UseHookPromisesBeforeRoute: typeof UseHookPromisesBeforeRoute
   AsyncUseTransitionIndexRoute: typeof AsyncUseTransitionIndexRoute
+  FormActionsIndexRoute: typeof FormActionsIndexRoute
   UseHookPromisesIndexRoute: typeof UseHookPromisesIndexRoute
   AsyncUseTransitionAnalyticsAfterRoute: typeof AsyncUseTransitionAnalyticsAfterRoute
   AsyncUseTransitionAnalyticsBeforeRoute: typeof AsyncUseTransitionAnalyticsBeforeRoute
@@ -285,9 +348,12 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FormActionsAfterRoute: FormActionsAfterRoute,
+  FormActionsBeforeRoute: FormActionsBeforeRoute,
   UseHookPromisesAfterRoute: UseHookPromisesAfterRoute,
   UseHookPromisesBeforeRoute: UseHookPromisesBeforeRoute,
   AsyncUseTransitionIndexRoute: AsyncUseTransitionIndexRoute,
+  FormActionsIndexRoute: FormActionsIndexRoute,
   UseHookPromisesIndexRoute: UseHookPromisesIndexRoute,
   AsyncUseTransitionAnalyticsAfterRoute: AsyncUseTransitionAnalyticsAfterRoute,
   AsyncUseTransitionAnalyticsBeforeRoute:
@@ -309,9 +375,12 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/form-actions/after",
+        "/form-actions/before",
         "/use-hook-promises/after",
         "/use-hook-promises/before",
         "/async-use-transition/",
+        "/form-actions/",
         "/use-hook-promises/",
         "/async-use-transition/analytics/after",
         "/async-use-transition/analytics/before",
@@ -324,6 +393,12 @@ export const routeTree = rootRoute
     "/": {
       "filePath": "index.tsx"
     },
+    "/form-actions/after": {
+      "filePath": "form-actions/after.tsx"
+    },
+    "/form-actions/before": {
+      "filePath": "form-actions/before.tsx"
+    },
     "/use-hook-promises/after": {
       "filePath": "use-hook-promises/after.tsx"
     },
@@ -332,6 +407,9 @@ export const routeTree = rootRoute
     },
     "/async-use-transition/": {
       "filePath": "async-use-transition/index.tsx"
+    },
+    "/form-actions/": {
+      "filePath": "form-actions/index.tsx"
     },
     "/use-hook-promises/": {
       "filePath": "use-hook-promises/index.tsx"

@@ -20,6 +20,11 @@ function App() {
                     id: 'use-hook-promises',
                     label: 'use-hook-promises',
                     href: '/use-hook-promises/'
+                },
+                {
+                    id: 'form-actions',
+                    label: 'form-actions',
+                    href: '/form-actions/'
                 }
             ]}
             showBackButton={false}
