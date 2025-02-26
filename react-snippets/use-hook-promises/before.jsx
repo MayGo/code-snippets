@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-function BeforeComponent() {
+export function TodoContent() {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -33,20 +33,8 @@ function BeforeComponent() {
         };
     }, []);
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
+    if (isLoading) return <Loader />;
+    if (error) return <ErrorMessage error={error} />;
 
-    return (
-        <div>
-            <h2>Todo Item</h2>
-            <p>
-                <strong>Title:</strong> {data?.title}
-            </p>
-            <p>
-                <strong>Completed:</strong> {data?.completed ? 'Yes' : 'No'}
-            </p>
-        </div>
-    );
+    return <TodoDisplay data={data} />;
 }
-
-export default BeforeComponent;
