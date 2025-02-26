@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
 import '../../../App.css';
 import { Layout } from '../../../components/Layout';
-import { AnalyticsViewerAfter } from './-components/AnalyticsViewerAfter';
+import { AnalyticsViewerAfter } from './components/AnalyticsViewerAfter';
 export const Route = createFileRoute('/async-use-transition/analytics/after')({
     component: Page
 });

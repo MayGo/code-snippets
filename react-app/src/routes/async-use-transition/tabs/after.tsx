@@ -3,7 +3,8 @@ import { useState } from 'react';
 import '../../../App.css';
 
 import { Layout } from '../../../components/Layout';
-import { TabsAfter } from './-components/TabsAfter';
+// @ts-ignore
+import { TabsAfter } from './components/TabsAfter';
 
 export const Route = createFileRoute('/async-use-transition/tabs/after')({
     component: App

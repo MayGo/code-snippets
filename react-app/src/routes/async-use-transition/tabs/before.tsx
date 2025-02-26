@@ -3,7 +3,7 @@ import { useState } from 'react';
 import '../../../App.css';
 
 import { Layout } from '../../../components/Layout';
-import { TabsBefore } from './-components/TabsBefore';
+import { TabsBefore } from './components/TabsBefore';
 
 export const Route = createFileRoute('/async-use-transition/tabs/before')({
     component: App

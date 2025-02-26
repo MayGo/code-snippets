@@ -3,7 +3,7 @@ import { useState } from 'react';
 import '../../../App.css';
 
 import { Layout } from '../../../components/Layout';
-import { AnalyticsViewerBefore } from './-components/AnalyticsViewerBefore';
+import { AnalyticsViewerBefore } from './components/AnalyticsViewerBefore';
 
 export const Route = createFileRoute('/async-use-transition/analytics/before')({
     component: App

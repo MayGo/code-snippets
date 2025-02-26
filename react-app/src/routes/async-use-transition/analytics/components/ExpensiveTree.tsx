@@ -1,5 +1,15 @@
-// eslint-disable-next-line react/prop-types
-export function ExpensiveChart({ data = [], dimmed }) {
+interface AnalyticsData {
+    id: number;
+    name: string;
+    age: number;
+}
+
+interface ExpensiveChartProps {
+    data: AnalyticsData[];
+    dimmed: boolean;
+}
+
+export function ExpensiveChart({ data = [], dimmed }: ExpensiveChartProps) {
     // Simulate heavy rendering by doing expensive calculations
     const heavyCalculation = () => {
         const start = Date.now();
@@ -14,7 +24,7 @@ export function ExpensiveChart({ data = [], dimmed }) {
     heavyCalculation();
 
     // Create a large number of elements to render
-    const elements = [];
+    const elements: JSX.Element[] = [];
     for (let i = 0; i < 1000; i++) {
         elements.push(
             <div key={i} style={{ padding: '2px', margin: '1px', border: '1px solid #ccc' }}>

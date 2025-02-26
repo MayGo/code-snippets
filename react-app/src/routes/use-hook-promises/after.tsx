@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Suspense, use } from 'react';
 import { Layout } from '../../components/Layout';
-
+import { TodoItem } from './components/TodoItem';
 // Define the Todo type to fix type errors
 interface Todo {
     userId: number;
@@ -25,17 +25,9 @@ function TodoDetail() {
     // use() hook unwraps the promise value directly in the render function
     const data = use(todoPromise);
 
-    return (
-        <div>
-            <h2 className="text-2xl font-bold mb-4">Todo Item (After)</h2>
-            <p className="mb-2">
-                <strong>Title:</strong> {data.title}
-            </p>
-            <p className="mb-4">
-                <strong>Completed:</strong> {data.completed ? 'Yes' : 'No'}
-            </p>
-        </div>
-    );
+    console.log('TodoDetail render....');
+
+    return <TodoItem title={data.title} completed={data.completed} />;
 }
 
 // Main component with Suspense boundary

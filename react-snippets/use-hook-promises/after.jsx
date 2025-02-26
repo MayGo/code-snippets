@@ -25,9 +25,11 @@ function TodoDetail() {
 // Main component with Suspense boundary
 function AfterComponent() {
     return (
-        <Suspense fallback={<div>Loading...</div>}>
-            <TodoDetail />
-        </Suspense>
+        <ErrorBoundary fallback={<p>Something went wrong</p>}>
+            <Suspense fallback={<p>Loading...</p>}>
+                <TodoDetail />
+            </Suspense>
+        </ErrorBoundary>
     );
 }
 

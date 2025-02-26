@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 import { Layout } from '../../components/Layout';
+import { TodoItem } from './components/TodoItem';
 
 // Define the Todo type to fix type errors
 interface Todo {
@@ -18,6 +19,8 @@ function BeforeComponent() {
     const [data, setData] = useState<Todo | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
+
+    console.log('BeforeComponent render....');
 
     useEffect(() => {
         let active = true;
@@ -56,13 +59,7 @@ function BeforeComponent() {
             description="UI blocked by async waterfalls. Manual race condition prevention. "
             showBackButton={true}
         >
-            <h2 className="text-2xl font-bold mb-4">Todo Item (Before)</h2>
-            <p className="mb-2">
-                <strong>Title:</strong> {data?.title}
-            </p>
-            <p className="mb-4">
-                <strong>Completed:</strong> {data?.completed ? 'Yes' : 'No'}
-            </p>
+            <TodoItem title={data?.title} completed={data?.completed} />
         </Layout>
     );
 }

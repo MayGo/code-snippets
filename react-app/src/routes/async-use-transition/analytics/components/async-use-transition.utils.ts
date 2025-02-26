@@ -1,4 +1,10 @@
-export const fakeData = [
+interface AnalyticsData {
+    id: number;
+    name: string;
+    age: number;
+}
+
+export const fakeData: AnalyticsData[] = [
     {
         id: 1,
         name: 'John Doe',
@@ -6,7 +12,7 @@ export const fakeData = [
     }
 ];
 
-export const processAnalytics = (data) => {
+export const processAnalytics = (data: AnalyticsData[]): AnalyticsData[] => {
     console.log('processing data');
     const start = Date.now();
     const waitTime = 100;
@@ -15,7 +21,7 @@ export const processAnalytics = (data) => {
         // Simulate heavy processing
     }
 
-    const processed = data.map((item) => ({
+    const processed = data.map((item: AnalyticsData) => ({
         ...item,
         name: item.name + Date.now().valueOf()
     }));
@@ -24,7 +30,7 @@ export const processAnalytics = (data) => {
     return processed;
 };
 
-export const fetchData = () => {
+export const fetchData = (params?: unknown): Promise<AnalyticsData[]> => {
     console.log('fetching data');
 
     return new Promise((resolve) => {
