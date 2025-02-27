@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useActionState, useEffect, useOptimistic, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { Layout } from '../../components/Layout';
-import { getComments, postComment, type CommentType } from './components/actions';
+import { getComments, postComment, type CommentType, type FormState } from './components/actions';
 import { CommentsLayout } from './components/CommentsLayout';
 import { CommentsList } from './components/CommentsList';
 import { ErrorMessage } from './components/ErrorMessage';
@@ -19,15 +19,19 @@ function SubmitButton() {
     return <MainButton pending={pending}>{pending ? 'Submitting...' : 'Submit Comment'}</MainButton>;
 }
 
-function CommentForm({ comments, refetchComments }: { comments: CommentType[]; refetchComments: () => void }) {
+interface Props {
+    comments: CommentType[];
+    refetchComments: () => void;
+}
+
+function CommentForm({ comments, refetchComments }: Props) {
     const [optimisticComments, addOptimisticComment] = useOptimistic<CommentType[], CommentType>(
         comments,
         (state, newComment) => [...state, newComment]
     );
 
-    const optimisticAddComment = async (prevState: any, formData: FormData) => {
+    const optimisticAddComment = async (prevState: FormState, formData: FormData) => {
         const comment = formData.get('comment') as string;
-
         const optimisticComment: CommentType = { id: uniqueId(), text: comment, optimistic: true };
 
         addOptimisticComment(optimisticComment);
@@ -58,7 +62,6 @@ function CommentForm({ comments, refetchComments }: { comments: CommentType[]; r
     );
 }
 
-// Main component
 function AfterComponent() {
     const [comments, setComments] = useState<CommentType[]>([]);
 

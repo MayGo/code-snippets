@@ -13,5 +13,5 @@
 
 💡 𝗡𝗼𝘁𝗲: Works best with frameworks like Next.js that support React Server Components and Actions
 
-![Before](./before.jsx.png)
-![After](./after.jsx.png)
+![Before](./before.tsx.png)
+![After](./after.tsx.png)

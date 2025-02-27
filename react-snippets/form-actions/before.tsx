@@ -1,25 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
-import { Layout } from '../../components/Layout';
-import { CommentsLayout } from './components/CommentsLayout';
-import { CommentsList } from './components/CommentsList';
-import { ErrorMessage } from './components/ErrorMessage';
-import { MainButton } from './components/MainButton';
-import { Textarea } from './components/Textarea';
-import type { CommentType } from './components/actions';
-import { addComment, getComments } from './components/requests';
-import { uniqueId } from './components/utils';
 
-export const Route = createFileRoute('/form-actions/before' as any)({
-    component: BeforeComponent
-});
-
-interface Props {
-    comments: CommentType[];
-    refetchComments: () => void;
-}
-
-function CommentForm({ comments, refetchComments }: Props) {
+export function CommentForm({ comments, refetchComments }: Props) {
     const [comment, setComment] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -56,7 +37,7 @@ function CommentForm({ comments, refetchComments }: Props) {
 
     return (
         <CommentsLayout>
-            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 mb-6">
+            <form onSubmit={handleSubmit}>
                 <Textarea
                     name="comment"
                     label="Add a comment:"
@@ -70,28 +51,5 @@ function CommentForm({ comments, refetchComments }: Props) {
             </form>
             <CommentsList comments={optimisticComments} />
         </CommentsLayout>
-    );
-}
-
-function BeforeComponent() {
-    const [comments, setComments] = useState<CommentType[]>([]);
-
-    const refetchComments = async () => {
-        const fetchedComments = await getComments();
-        setComments(fetchedComments);
-    };
-
-    useEffect(() => {
-        refetchComments();
-    }, []);
-
-    return (
-        <Layout
-            title="Before: Traditional Form Handling"
-            description="Multiple useState hooks with manual loading states, error handling, and UI updates."
-            showBackButton={true}
-        >
-            <CommentForm comments={comments} refetchComments={refetchComments} />
-        </Layout>
     );
 }

@@ -7,8 +7,23 @@ export interface CommentType {
 
 // Define the form state type
 export interface ResponseType {
-    comments: CommentType[];
+    success: boolean;
     error: string | null;
+}
+
+// Mock data for comments
+let comments: CommentType[] = [
+    {
+        id: '1',
+        text: 'Comment 1'
+    }
+];
+
+// Function to get all comments
+export async function getComments(): Promise<CommentType[]> {
+    // Mock API call with a delay to simulate network latency
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    return [...comments]; // Return a copy to avoid reference issues
 }
 
 // Server action (would normally be server-side in Next.js)
@@ -17,20 +32,22 @@ export async function addComment(comment: CommentType): Promise<ResponseType> {
         // Mock API call with a delay to simulate network latency
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        // Mock successful response
         const newComment: CommentType = {
             id: `comment-${Date.now()}`,
             text: comment.text
         };
 
+        // Add the comment to our mock database
+        comments.push(newComment);
+
         // Return new state
         return {
-            comments: [newComment],
+            success: true, // Return all comments
             error: null
         };
     } catch (err) {
         return {
-            comments: [],
+            success: false,
             error: 'Failed to submit comment'
         };
     }
