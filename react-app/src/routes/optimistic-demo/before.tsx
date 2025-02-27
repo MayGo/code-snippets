@@ -43,13 +43,11 @@ function Todos() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
         setIsSubmitting(true);
         setError(null);
 
         try {
             const newTodo: TodoItem = { id: uniqueId(), text: todoText, completed: false, optimistic: true };
-
             setOptimisticTodos((prev) => [...prev, newTodo]);
 
             const result = await addTodo({ success: false, error: null }, new FormData(e.target as HTMLFormElement));
@@ -82,11 +80,9 @@ function Todos() {
                         onChange={handleTodoChange}
                     />
                     <ErrorMessage error={error} />
-
                     <Button pending={isSubmitting}>{isSubmitting ? 'Adding...' : 'Add Todo'}</Button>
                 </form>
             </Card>
-
             <TodoList todos={optimisticTodos} />
         </TodoLayout>
     );

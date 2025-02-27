@@ -29,17 +29,17 @@ function Todos() {
         newTodo
     ]);
 
+    const fetchTodos = async () => {
+        const fetchedTodos = await getTodos();
+        setTodos(fetchedTodos);
+    };
+
     useEffect(() => {
-        const fetchTodos = async () => {
-            const fetchedTodos = await getTodos();
-            setTodos(fetchedTodos);
-        };
         fetchTodos();
     }, []);
 
     const optimisticAddTodo = async (prevState: FormState, formData: FormData) => {
         const text = formData.get('todo') as string;
-
         const optimisticTodo: TodoItem = { id: uniqueId(), text, completed: false, optimistic: true };
 
         addOptimisticTodo(optimisticTodo);
@@ -47,8 +47,7 @@ function Todos() {
         const result = await addTodo(prevState, formData);
 
         if (result.success) {
-            const updatedTodos = await getTodos();
-            setTodos(updatedTodos);
+            await fetchTodos();
         }
 
         return result;
@@ -68,7 +67,6 @@ function Todos() {
                     <SubmitButton />
                 </form>
             </Card>
-
             <TodoList todos={optimisticTodos} />
         </TodoLayout>
     );
