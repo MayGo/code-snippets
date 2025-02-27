@@ -18,7 +18,8 @@ import { Route as FormActionsIndexImport } from './routes/form-actions/index'
 import { Route as AsyncUseTransitionIndexImport } from './routes/async-use-transition/index'
 import { Route as UseHookPromisesBeforeImport } from './routes/use-hook-promises/before'
 import { Route as UseHookPromisesAfterImport } from './routes/use-hook-promises/after'
-import { Route as OptimisticDemoOptimisticImport } from './routes/optimistic-demo/optimistic'
+import { Route as OptimisticDemoBeforeImport } from './routes/optimistic-demo/before'
+import { Route as OptimisticDemoAfterImport } from './routes/optimistic-demo/after'
 import { Route as FormActionsBeforeImport } from './routes/form-actions/before'
 import { Route as FormActionsAfterImport } from './routes/form-actions/after'
 import { Route as AsyncUseTransitionTabsIndexImport } from './routes/async-use-transition/tabs/index'
@@ -72,9 +73,15 @@ const UseHookPromisesAfterRoute = UseHookPromisesAfterImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const OptimisticDemoOptimisticRoute = OptimisticDemoOptimisticImport.update({
-  id: '/optimistic-demo/optimistic',
-  path: '/optimistic-demo/optimistic',
+const OptimisticDemoBeforeRoute = OptimisticDemoBeforeImport.update({
+  id: '/optimistic-demo/before',
+  path: '/optimistic-demo/before',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const OptimisticDemoAfterRoute = OptimisticDemoAfterImport.update({
+  id: '/optimistic-demo/after',
+  path: '/optimistic-demo/after',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -157,11 +164,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FormActionsBeforeImport
       parentRoute: typeof rootRoute
     }
-    '/optimistic-demo/optimistic': {
-      id: '/optimistic-demo/optimistic'
-      path: '/optimistic-demo/optimistic'
-      fullPath: '/optimistic-demo/optimistic'
-      preLoaderRoute: typeof OptimisticDemoOptimisticImport
+    '/optimistic-demo/after': {
+      id: '/optimistic-demo/after'
+      path: '/optimistic-demo/after'
+      fullPath: '/optimistic-demo/after'
+      preLoaderRoute: typeof OptimisticDemoAfterImport
+      parentRoute: typeof rootRoute
+    }
+    '/optimistic-demo/before': {
+      id: '/optimistic-demo/before'
+      path: '/optimistic-demo/before'
+      fullPath: '/optimistic-demo/before'
+      preLoaderRoute: typeof OptimisticDemoBeforeImport
       parentRoute: typeof rootRoute
     }
     '/use-hook-promises/after': {
@@ -257,7 +271,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/form-actions/after': typeof FormActionsAfterRoute
   '/form-actions/before': typeof FormActionsBeforeRoute
-  '/optimistic-demo/optimistic': typeof OptimisticDemoOptimisticRoute
+  '/optimistic-demo/after': typeof OptimisticDemoAfterRoute
+  '/optimistic-demo/before': typeof OptimisticDemoBeforeRoute
   '/use-hook-promises/after': typeof UseHookPromisesAfterRoute
   '/use-hook-promises/before': typeof UseHookPromisesBeforeRoute
   '/async-use-transition': typeof AsyncUseTransitionIndexRoute
@@ -276,7 +291,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/form-actions/after': typeof FormActionsAfterRoute
   '/form-actions/before': typeof FormActionsBeforeRoute
-  '/optimistic-demo/optimistic': typeof OptimisticDemoOptimisticRoute
+  '/optimistic-demo/after': typeof OptimisticDemoAfterRoute
+  '/optimistic-demo/before': typeof OptimisticDemoBeforeRoute
   '/use-hook-promises/after': typeof UseHookPromisesAfterRoute
   '/use-hook-promises/before': typeof UseHookPromisesBeforeRoute
   '/async-use-transition': typeof AsyncUseTransitionIndexRoute
@@ -296,7 +312,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/form-actions/after': typeof FormActionsAfterRoute
   '/form-actions/before': typeof FormActionsBeforeRoute
-  '/optimistic-demo/optimistic': typeof OptimisticDemoOptimisticRoute
+  '/optimistic-demo/after': typeof OptimisticDemoAfterRoute
+  '/optimistic-demo/before': typeof OptimisticDemoBeforeRoute
   '/use-hook-promises/after': typeof UseHookPromisesAfterRoute
   '/use-hook-promises/before': typeof UseHookPromisesBeforeRoute
   '/async-use-transition/': typeof AsyncUseTransitionIndexRoute
@@ -317,7 +334,8 @@ export interface FileRouteTypes {
     | '/'
     | '/form-actions/after'
     | '/form-actions/before'
-    | '/optimistic-demo/optimistic'
+    | '/optimistic-demo/after'
+    | '/optimistic-demo/before'
     | '/use-hook-promises/after'
     | '/use-hook-promises/before'
     | '/async-use-transition'
@@ -335,7 +353,8 @@ export interface FileRouteTypes {
     | '/'
     | '/form-actions/after'
     | '/form-actions/before'
-    | '/optimistic-demo/optimistic'
+    | '/optimistic-demo/after'
+    | '/optimistic-demo/before'
     | '/use-hook-promises/after'
     | '/use-hook-promises/before'
     | '/async-use-transition'
@@ -353,7 +372,8 @@ export interface FileRouteTypes {
     | '/'
     | '/form-actions/after'
     | '/form-actions/before'
-    | '/optimistic-demo/optimistic'
+    | '/optimistic-demo/after'
+    | '/optimistic-demo/before'
     | '/use-hook-promises/after'
     | '/use-hook-promises/before'
     | '/async-use-transition/'
@@ -373,7 +393,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FormActionsAfterRoute: typeof FormActionsAfterRoute
   FormActionsBeforeRoute: typeof FormActionsBeforeRoute
-  OptimisticDemoOptimisticRoute: typeof OptimisticDemoOptimisticRoute
+  OptimisticDemoAfterRoute: typeof OptimisticDemoAfterRoute
+  OptimisticDemoBeforeRoute: typeof OptimisticDemoBeforeRoute
   UseHookPromisesAfterRoute: typeof UseHookPromisesAfterRoute
   UseHookPromisesBeforeRoute: typeof UseHookPromisesBeforeRoute
   AsyncUseTransitionIndexRoute: typeof AsyncUseTransitionIndexRoute
@@ -392,7 +413,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FormActionsAfterRoute: FormActionsAfterRoute,
   FormActionsBeforeRoute: FormActionsBeforeRoute,
-  OptimisticDemoOptimisticRoute: OptimisticDemoOptimisticRoute,
+  OptimisticDemoAfterRoute: OptimisticDemoAfterRoute,
+  OptimisticDemoBeforeRoute: OptimisticDemoBeforeRoute,
   UseHookPromisesAfterRoute: UseHookPromisesAfterRoute,
   UseHookPromisesBeforeRoute: UseHookPromisesBeforeRoute,
   AsyncUseTransitionIndexRoute: AsyncUseTransitionIndexRoute,
@@ -421,7 +443,8 @@ export const routeTree = rootRoute
         "/",
         "/form-actions/after",
         "/form-actions/before",
-        "/optimistic-demo/optimistic",
+        "/optimistic-demo/after",
+        "/optimistic-demo/before",
         "/use-hook-promises/after",
         "/use-hook-promises/before",
         "/async-use-transition/",
@@ -445,8 +468,11 @@ export const routeTree = rootRoute
     "/form-actions/before": {
       "filePath": "form-actions/before.tsx"
     },
-    "/optimistic-demo/optimistic": {
-      "filePath": "optimistic-demo/optimistic.tsx"
+    "/optimistic-demo/after": {
+      "filePath": "optimistic-demo/after.tsx"
+    },
+    "/optimistic-demo/before": {
+      "filePath": "optimistic-demo/before.tsx"
     },
     "/use-hook-promises/after": {
       "filePath": "use-hook-promises/after.tsx"
