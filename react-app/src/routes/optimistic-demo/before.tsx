@@ -22,37 +22,27 @@ function Todos() {
     const [todoText, setTodoText] = useState('');
     const [error, setError] = useState<string | null>(null);
 
-    // Fetch todos and update both real and optimistic states
     const fetchTodos = async () => {
         const fetchedTodos = await getTodos();
         setTodos(fetchedTodos);
         setOptimisticTodos(fetchedTodos);
     };
 
-    // Initial fetch
     useEffect(() => {
         fetchTodos();
     }, []);
 
-    // Update optimistic state when real state changes
     useEffect(() => {
         setOptimisticTodos(todos);
     }, [todos]);
 
-    // Handle input change
     const handleTodoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTodoText(e.target.value);
         setError(null);
     };
 
-    // Handle form submission with optimistic update
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        if (!todoText || todoText.trim().length < 2) {
-            setError('Todo must be at least 2 characters');
-            return;
-        }
 
         setIsSubmitting(true);
         setError(null);
