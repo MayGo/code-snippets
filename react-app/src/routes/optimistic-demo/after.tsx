@@ -53,7 +53,7 @@ function Todos() {
         return result;
     };
 
-    const [formState, formAction] = useActionState(optimisticAddTodo, {
+    const [formState, formAction, isPending] = useActionState(optimisticAddTodo, {
         success: false,
         error: null
     });
@@ -62,7 +62,7 @@ function Todos() {
         <TodoLayout>
             <Card title="Add a New Todo">
                 <form action={formAction} className="space-y-4">
-                    <Input name="todo" placeholder="Enter a new todo" required />
+                    <Input name="todo" placeholder="Enter a new todo" required disabled={isPending} />
                     <ErrorMessage error={formState.error} />
                     <SubmitButton />
                 </form>
