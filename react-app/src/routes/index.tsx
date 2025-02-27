@@ -25,6 +25,11 @@ function App() {
                     id: 'form-actions',
                     label: 'form-actions',
                     href: '/form-actions/'
+                },
+                {
+                    id: 'optimistic-demo',
+                    label: 'optimistic-demo',
+                    href: '/optimistic-demo/'
                 }
             ]}
             showBackButton={false}
