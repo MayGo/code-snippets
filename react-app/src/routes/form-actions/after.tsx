@@ -1,9 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useOptimistic } from 'react';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState, useEffect, useOptimistic, useState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { Layout } from '../../components/Layout';
-import type { CommentType } from './components/actions';
-import { addComment } from './components/actions';
+import { getComments, postComment, type CommentType } from './components/actions';
 import { CommentsLayout } from './components/CommentsLayout';
 import { CommentsList } from './components/CommentsList';
 import { ErrorMessage } from './components/ErrorMessage';
@@ -11,66 +10,73 @@ import { MainButton } from './components/MainButton';
 import { Textarea } from './components/Textarea';
 import { uniqueId } from './components/utils';
 
-// Adding 'as any' to handle type error, but in a real app this would be properly
-// typed in the router configuration
-export const Route = createFileRoute('/form-actions/after' as any)({
+export const Route = createFileRoute('/form-actions/after')({
     component: AfterComponent
 });
 
 function SubmitButton() {
     const { pending } = useFormStatus();
-
     return <MainButton pending={pending}>{pending ? 'Submitting...' : 'Submit Comment'}</MainButton>;
 }
 
-function CommentForm() {
+function CommentForm({ comments, refetchComments }: { comments: CommentType[]; refetchComments: () => void }) {
     const [optimisticComments, addOptimisticComment] = useOptimistic<CommentType[], CommentType>(
-        [],
+        comments,
         (state, newComment) => [...state, newComment]
     );
 
     const optimisticAddComment = async (prevState: any, formData: FormData) => {
         const comment = formData.get('comment') as string;
 
-        const optimisticComment: CommentType = {
-            id: uniqueId(),
-            text: comment,
-            optimistic: true
-        };
+        const optimisticComment: CommentType = { id: uniqueId(), text: comment, optimistic: true };
 
         addOptimisticComment(optimisticComment);
 
-        return addComment(prevState, formData);
+        const result = await postComment(prevState, formData);
+
+        if (result.success) {
+            refetchComments();
+        }
+
+        return result;
     };
 
-    const [formState, formAction] = useFormState(optimisticAddComment, {
-        comments: [],
+    const [formState, formAction, isPending] = useActionState(optimisticAddComment, {
+        success: false,
         error: null
     });
-
-    const allComments = [...formState.comments, ...optimisticComments.filter((c) => c.optimistic)];
 
     return (
         <CommentsLayout>
             <form action={formAction} className="bg-white shadow-md rounded-lg p-6 mb-6">
-                <Textarea name="comment" label="Add a comment:" required />
+                <Textarea name="comment" label="Add a comment:" required disabled={isPending} />
                 {formState.error && <ErrorMessage error={formState.error} />}
                 <SubmitButton />
             </form>
-            <CommentsList comments={allComments} />
+            <CommentsList comments={optimisticComments} />
         </CommentsLayout>
     );
 }
 
 // Main component
 function AfterComponent() {
+    const [comments, setComments] = useState<CommentType[]>([]);
+
+    const refetchComments = async () => {
+        setComments(await getComments());
+    };
+
+    useEffect(() => {
+        refetchComments();
+    }, []);
+
     return (
         <Layout
             title="After: Modern Form Actions"
             description="Using form actions, useFormStatus, useFormState, and optimistic UI for clean, reactive form handling."
             showBackButton={true}
         >
-            <CommentForm />
+            <CommentForm comments={comments} refetchComments={refetchComments} />
         </Layout>
     );
 }
