@@ -1,30 +1,25 @@
-import React, { useId } from 'react';
+import { useId } from 'react';
+import type { CallbackRefInputProps } from '../shared/InputTypes';
+import { inputContainerStyles, inputStyles, labelStyles } from '../shared/InputUI';
 
-interface CustomInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'id'> {
-    label?: string;
-    onInputFocus?: () => void;
-    registerInput?: (el: HTMLInputElement) => void;
-}
-
-// Input component without forwardRef
-export function CustomInputAfter({ label, onInputFocus, registerInput, ...props }: CustomInputProps) {
+// Input component with callback ref pattern
+export function CustomInputAfter({ label, onInputFocus, registerInput, ...props }: CallbackRefInputProps) {
     const id = useId();
 
-    // Callback ref pattern
     const handleRef = (el: HTMLInputElement | null) => {
         if (el && registerInput) registerInput(el);
     };
 
     return (
-        <div className="mb-4">
+        <div className={inputContainerStyles}>
             {label && (
-                <label htmlFor={id} className="block text-sm font-medium mb-1">
+                <label htmlFor={id} className={labelStyles}>
                     {label}
                 </label>
             )}
             <input
                 id={id}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={inputStyles}
                 onFocus={onInputFocus ? () => onInputFocus() : undefined}
                 ref={handleRef}
                 {...props}

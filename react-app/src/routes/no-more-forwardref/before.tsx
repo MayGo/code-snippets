@@ -2,6 +2,8 @@ import { createFileRoute } from '@tanstack/react-router';
 import { type FormEvent, useRef, useState } from 'react';
 import { CustomButtonBefore } from './components/before/CustomButtonBefore';
 import { CustomInputBefore } from './components/before/CustomInputBefore';
+import { Layout } from './components/shared/Layout';
+import { UtilityButton } from './components/shared/UtilityButton';
 
 export const Route = createFileRoute('/no-more-forwardref/before')({
     component: BeforeExample
@@ -37,8 +39,7 @@ function BeforeExample() {
     };
 
     return (
-        <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold mb-4">Traditional ForwardRef Example</h2>
+        <Layout title="Traditional ForwardRef Example">
             <form onSubmit={handleSubmit}>
                 <CustomInputBefore
                     ref={inputRef}
@@ -53,32 +54,10 @@ function BeforeExample() {
                         Submit
                     </CustomButtonBefore>
 
-                    <button
-                        type="button"
-                        onClick={focusInput}
-                        className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
-                    >
-                        Focus Input
-                    </button>
-
-                    <button
-                        type="button"
-                        onClick={clickButton}
-                        className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
-                    >
-                        Click Submit
-                    </button>
+                    <UtilityButton onClick={focusInput}>Focus Input</UtilityButton>
+                    <UtilityButton onClick={clickButton}>Click Submit</UtilityButton>
                 </div>
             </form>
-
-            <div className="mt-4 p-4 bg-gray-100 rounded-md">
-                <h3 className="font-medium mb-2">Implementation Notes:</h3>
-                <p className="text-sm text-gray-700">
-                    This example uses <code>forwardRef</code> to pass ref objects from parent components down to
-                    specific DOM elements in child components. This approach requires additional boilerplate and
-                    complexity.
-                </p>
-            </div>
-        </div>
+        </Layout>
     );
 }
