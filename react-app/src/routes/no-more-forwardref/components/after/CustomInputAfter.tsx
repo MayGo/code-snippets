@@ -1,14 +1,9 @@
 import { useId } from 'react';
-import type { CallbackRefInputProps } from '../shared/InputTypes';
+import type { BaseInputProps } from '../shared/InputTypes';
 import { inputContainerStyles, inputStyles, labelStyles } from '../shared/InputUI';
 
-// Input component with callback ref pattern
-export function CustomInputAfter({ label, onInputFocus, registerInput, ...props }: CallbackRefInputProps) {
+export function CustomInputAfter({ label, ...props }: BaseInputProps) {
     const id = useId();
-
-    const handleRef = (el: HTMLInputElement | null) => {
-        if (el && registerInput) registerInput(el);
-    };
 
     return (
         <div className={inputContainerStyles}>
@@ -17,13 +12,7 @@ export function CustomInputAfter({ label, onInputFocus, registerInput, ...props 
                     {label}
                 </label>
             )}
-            <input
-                id={id}
-                className={inputStyles}
-                onFocus={onInputFocus ? () => onInputFocus() : undefined}
-                ref={handleRef}
-                {...props}
-            />
+            <input id={id} className={inputStyles} {...props} />
         </div>
     );
 }

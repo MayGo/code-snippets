@@ -1,11 +1,10 @@
 import { forwardRef, useId } from 'react';
-import type { ForwardRefButtonProps } from '../shared/ButtonTypes';
+import type { BaseButtonProps } from '../shared/ButtonTypes';
 import { buttonStyles, LoadingSpinner } from '../shared/ButtonUI';
 
-// Button component with forwardRef pattern
-export const CustomButtonBefore = forwardRef<HTMLButtonElement, ForwardRefButtonProps>(
+export const CustomButtonBefore = forwardRef<HTMLButtonElement, BaseButtonProps>(
     ({ children, isLoading, ...buttonProps }, ref) => {
-        const id = useId(); // Add id generation for consistency with After version
+        const id = useId();
 
         return (
             <button
