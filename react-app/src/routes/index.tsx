@@ -30,6 +30,11 @@ function App() {
                     id: 'optimistic-demo',
                     label: 'optimistic-demo',
                     href: '/optimistic-demo/'
+                },
+                {
+                    id: 'no-more-forwardref',
+                    label: 'no-more-forwardref',
+                    href: '/no-more-forwardref/'
                 }
             ]}
             showBackButton={false}

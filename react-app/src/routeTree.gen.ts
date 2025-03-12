@@ -14,12 +14,15 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as UseHookPromisesIndexImport } from './routes/use-hook-promises/index'
 import { Route as OptimisticDemoIndexImport } from './routes/optimistic-demo/index'
+import { Route as NoMoreForwardrefIndexImport } from './routes/no-more-forwardref/index'
 import { Route as FormActionsIndexImport } from './routes/form-actions/index'
 import { Route as AsyncUseTransitionIndexImport } from './routes/async-use-transition/index'
 import { Route as UseHookPromisesBeforeImport } from './routes/use-hook-promises/before'
 import { Route as UseHookPromisesAfterImport } from './routes/use-hook-promises/after'
 import { Route as OptimisticDemoBeforeImport } from './routes/optimistic-demo/before'
 import { Route as OptimisticDemoAfterImport } from './routes/optimistic-demo/after'
+import { Route as NoMoreForwardrefBeforeImport } from './routes/no-more-forwardref/before'
+import { Route as NoMoreForwardrefAfterImport } from './routes/no-more-forwardref/after'
 import { Route as FormActionsBeforeImport } from './routes/form-actions/before'
 import { Route as FormActionsAfterImport } from './routes/form-actions/after'
 import { Route as AsyncUseTransitionTabsIndexImport } from './routes/async-use-transition/tabs/index'
@@ -46,6 +49,12 @@ const UseHookPromisesIndexRoute = UseHookPromisesIndexImport.update({
 const OptimisticDemoIndexRoute = OptimisticDemoIndexImport.update({
   id: '/optimistic-demo/',
   path: '/optimistic-demo/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const NoMoreForwardrefIndexRoute = NoMoreForwardrefIndexImport.update({
+  id: '/no-more-forwardref/',
+  path: '/no-more-forwardref/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -82,6 +91,18 @@ const OptimisticDemoBeforeRoute = OptimisticDemoBeforeImport.update({
 const OptimisticDemoAfterRoute = OptimisticDemoAfterImport.update({
   id: '/optimistic-demo/after',
   path: '/optimistic-demo/after',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const NoMoreForwardrefBeforeRoute = NoMoreForwardrefBeforeImport.update({
+  id: '/no-more-forwardref/before',
+  path: '/no-more-forwardref/before',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const NoMoreForwardrefAfterRoute = NoMoreForwardrefAfterImport.update({
+  id: '/no-more-forwardref/after',
+  path: '/no-more-forwardref/after',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -164,6 +185,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FormActionsBeforeImport
       parentRoute: typeof rootRoute
     }
+    '/no-more-forwardref/after': {
+      id: '/no-more-forwardref/after'
+      path: '/no-more-forwardref/after'
+      fullPath: '/no-more-forwardref/after'
+      preLoaderRoute: typeof NoMoreForwardrefAfterImport
+      parentRoute: typeof rootRoute
+    }
+    '/no-more-forwardref/before': {
+      id: '/no-more-forwardref/before'
+      path: '/no-more-forwardref/before'
+      fullPath: '/no-more-forwardref/before'
+      preLoaderRoute: typeof NoMoreForwardrefBeforeImport
+      parentRoute: typeof rootRoute
+    }
     '/optimistic-demo/after': {
       id: '/optimistic-demo/after'
       path: '/optimistic-demo/after'
@@ -204,6 +239,13 @@ declare module '@tanstack/react-router' {
       path: '/form-actions'
       fullPath: '/form-actions'
       preLoaderRoute: typeof FormActionsIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/no-more-forwardref/': {
+      id: '/no-more-forwardref/'
+      path: '/no-more-forwardref'
+      fullPath: '/no-more-forwardref'
+      preLoaderRoute: typeof NoMoreForwardrefIndexImport
       parentRoute: typeof rootRoute
     }
     '/optimistic-demo/': {
@@ -271,12 +313,15 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/form-actions/after': typeof FormActionsAfterRoute
   '/form-actions/before': typeof FormActionsBeforeRoute
+  '/no-more-forwardref/after': typeof NoMoreForwardrefAfterRoute
+  '/no-more-forwardref/before': typeof NoMoreForwardrefBeforeRoute
   '/optimistic-demo/after': typeof OptimisticDemoAfterRoute
   '/optimistic-demo/before': typeof OptimisticDemoBeforeRoute
   '/use-hook-promises/after': typeof UseHookPromisesAfterRoute
   '/use-hook-promises/before': typeof UseHookPromisesBeforeRoute
   '/async-use-transition': typeof AsyncUseTransitionIndexRoute
   '/form-actions': typeof FormActionsIndexRoute
+  '/no-more-forwardref': typeof NoMoreForwardrefIndexRoute
   '/optimistic-demo': typeof OptimisticDemoIndexRoute
   '/use-hook-promises': typeof UseHookPromisesIndexRoute
   '/async-use-transition/analytics/after': typeof AsyncUseTransitionAnalyticsAfterRoute
@@ -291,12 +336,15 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/form-actions/after': typeof FormActionsAfterRoute
   '/form-actions/before': typeof FormActionsBeforeRoute
+  '/no-more-forwardref/after': typeof NoMoreForwardrefAfterRoute
+  '/no-more-forwardref/before': typeof NoMoreForwardrefBeforeRoute
   '/optimistic-demo/after': typeof OptimisticDemoAfterRoute
   '/optimistic-demo/before': typeof OptimisticDemoBeforeRoute
   '/use-hook-promises/after': typeof UseHookPromisesAfterRoute
   '/use-hook-promises/before': typeof UseHookPromisesBeforeRoute
   '/async-use-transition': typeof AsyncUseTransitionIndexRoute
   '/form-actions': typeof FormActionsIndexRoute
+  '/no-more-forwardref': typeof NoMoreForwardrefIndexRoute
   '/optimistic-demo': typeof OptimisticDemoIndexRoute
   '/use-hook-promises': typeof UseHookPromisesIndexRoute
   '/async-use-transition/analytics/after': typeof AsyncUseTransitionAnalyticsAfterRoute
@@ -312,12 +360,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/form-actions/after': typeof FormActionsAfterRoute
   '/form-actions/before': typeof FormActionsBeforeRoute
+  '/no-more-forwardref/after': typeof NoMoreForwardrefAfterRoute
+  '/no-more-forwardref/before': typeof NoMoreForwardrefBeforeRoute
   '/optimistic-demo/after': typeof OptimisticDemoAfterRoute
   '/optimistic-demo/before': typeof OptimisticDemoBeforeRoute
   '/use-hook-promises/after': typeof UseHookPromisesAfterRoute
   '/use-hook-promises/before': typeof UseHookPromisesBeforeRoute
   '/async-use-transition/': typeof AsyncUseTransitionIndexRoute
   '/form-actions/': typeof FormActionsIndexRoute
+  '/no-more-forwardref/': typeof NoMoreForwardrefIndexRoute
   '/optimistic-demo/': typeof OptimisticDemoIndexRoute
   '/use-hook-promises/': typeof UseHookPromisesIndexRoute
   '/async-use-transition/analytics/after': typeof AsyncUseTransitionAnalyticsAfterRoute
@@ -334,12 +385,15 @@ export interface FileRouteTypes {
     | '/'
     | '/form-actions/after'
     | '/form-actions/before'
+    | '/no-more-forwardref/after'
+    | '/no-more-forwardref/before'
     | '/optimistic-demo/after'
     | '/optimistic-demo/before'
     | '/use-hook-promises/after'
     | '/use-hook-promises/before'
     | '/async-use-transition'
     | '/form-actions'
+    | '/no-more-forwardref'
     | '/optimistic-demo'
     | '/use-hook-promises'
     | '/async-use-transition/analytics/after'
@@ -353,12 +407,15 @@ export interface FileRouteTypes {
     | '/'
     | '/form-actions/after'
     | '/form-actions/before'
+    | '/no-more-forwardref/after'
+    | '/no-more-forwardref/before'
     | '/optimistic-demo/after'
     | '/optimistic-demo/before'
     | '/use-hook-promises/after'
     | '/use-hook-promises/before'
     | '/async-use-transition'
     | '/form-actions'
+    | '/no-more-forwardref'
     | '/optimistic-demo'
     | '/use-hook-promises'
     | '/async-use-transition/analytics/after'
@@ -372,12 +429,15 @@ export interface FileRouteTypes {
     | '/'
     | '/form-actions/after'
     | '/form-actions/before'
+    | '/no-more-forwardref/after'
+    | '/no-more-forwardref/before'
     | '/optimistic-demo/after'
     | '/optimistic-demo/before'
     | '/use-hook-promises/after'
     | '/use-hook-promises/before'
     | '/async-use-transition/'
     | '/form-actions/'
+    | '/no-more-forwardref/'
     | '/optimistic-demo/'
     | '/use-hook-promises/'
     | '/async-use-transition/analytics/after'
@@ -393,12 +453,15 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FormActionsAfterRoute: typeof FormActionsAfterRoute
   FormActionsBeforeRoute: typeof FormActionsBeforeRoute
+  NoMoreForwardrefAfterRoute: typeof NoMoreForwardrefAfterRoute
+  NoMoreForwardrefBeforeRoute: typeof NoMoreForwardrefBeforeRoute
   OptimisticDemoAfterRoute: typeof OptimisticDemoAfterRoute
   OptimisticDemoBeforeRoute: typeof OptimisticDemoBeforeRoute
   UseHookPromisesAfterRoute: typeof UseHookPromisesAfterRoute
   UseHookPromisesBeforeRoute: typeof UseHookPromisesBeforeRoute
   AsyncUseTransitionIndexRoute: typeof AsyncUseTransitionIndexRoute
   FormActionsIndexRoute: typeof FormActionsIndexRoute
+  NoMoreForwardrefIndexRoute: typeof NoMoreForwardrefIndexRoute
   OptimisticDemoIndexRoute: typeof OptimisticDemoIndexRoute
   UseHookPromisesIndexRoute: typeof UseHookPromisesIndexRoute
   AsyncUseTransitionAnalyticsAfterRoute: typeof AsyncUseTransitionAnalyticsAfterRoute
@@ -413,12 +476,15 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FormActionsAfterRoute: FormActionsAfterRoute,
   FormActionsBeforeRoute: FormActionsBeforeRoute,
+  NoMoreForwardrefAfterRoute: NoMoreForwardrefAfterRoute,
+  NoMoreForwardrefBeforeRoute: NoMoreForwardrefBeforeRoute,
   OptimisticDemoAfterRoute: OptimisticDemoAfterRoute,
   OptimisticDemoBeforeRoute: OptimisticDemoBeforeRoute,
   UseHookPromisesAfterRoute: UseHookPromisesAfterRoute,
   UseHookPromisesBeforeRoute: UseHookPromisesBeforeRoute,
   AsyncUseTransitionIndexRoute: AsyncUseTransitionIndexRoute,
   FormActionsIndexRoute: FormActionsIndexRoute,
+  NoMoreForwardrefIndexRoute: NoMoreForwardrefIndexRoute,
   OptimisticDemoIndexRoute: OptimisticDemoIndexRoute,
   UseHookPromisesIndexRoute: UseHookPromisesIndexRoute,
   AsyncUseTransitionAnalyticsAfterRoute: AsyncUseTransitionAnalyticsAfterRoute,
@@ -443,12 +509,15 @@ export const routeTree = rootRoute
         "/",
         "/form-actions/after",
         "/form-actions/before",
+        "/no-more-forwardref/after",
+        "/no-more-forwardref/before",
         "/optimistic-demo/after",
         "/optimistic-demo/before",
         "/use-hook-promises/after",
         "/use-hook-promises/before",
         "/async-use-transition/",
         "/form-actions/",
+        "/no-more-forwardref/",
         "/optimistic-demo/",
         "/use-hook-promises/",
         "/async-use-transition/analytics/after",
@@ -468,6 +537,12 @@ export const routeTree = rootRoute
     "/form-actions/before": {
       "filePath": "form-actions/before.tsx"
     },
+    "/no-more-forwardref/after": {
+      "filePath": "no-more-forwardref/after.tsx"
+    },
+    "/no-more-forwardref/before": {
+      "filePath": "no-more-forwardref/before.tsx"
+    },
     "/optimistic-demo/after": {
       "filePath": "optimistic-demo/after.tsx"
     },
@@ -485,6 +560,9 @@ export const routeTree = rootRoute
     },
     "/form-actions/": {
       "filePath": "form-actions/index.tsx"
+    },
+    "/no-more-forwardref/": {
+      "filePath": "no-more-forwardref/index.tsx"
     },
     "/optimistic-demo/": {
       "filePath": "optimistic-demo/index.tsx"
