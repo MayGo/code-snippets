@@ -1,24 +1,19 @@
-# No more forwardRef
+## React 19: Refs Just Got Simpler!
 
-This example demonstrates modern React patterns that can help you avoid using `forwardRef` in many common scenarios.
+The need for `forwardRef` has been significantly reduced. The React team has made refs more intuitive and easier to work with:
 
-The examples show different approaches to handle component interactions without explicitly passing refs through component boundaries:
+-   **Automatic ref forwarding**: React 19 automatically forwards refs to the underlying DOM elements
+-   **No more boilerplate**: You don't need to wrap your components in `forwardRef` to pass refs down
+-   **Simplified component code**: Your component definitions can be cleaner and more straightforward
 
-1. **Traditional forwardRef approach** - The conventional way of passing refs through components
-2. **Modern hook-based approaches** - Using hooks like `useImperativeHandle` and composition
-3. **State management patterns** - Leveraging state management and context for communication between components
+## ESLint Rule for Migrating Away from forwardRef
 
-## Examples
+To help identify and remove unnecessary `forwardRef` usage in your codebase, add the following ESLint rule to your configuration: "@eslint-react/no-forward-ref": "error"
 
-Each example is provided in "before" and "after" versions:
+This rule from [eslint-react](https://eslint-react.xyz/docs/rules/no-forward-ref) will:
 
--   `before.jsx` - Shows the traditional approach using forwardRef
--   `after.jsx` - Shows the modern approach avoiding forwardRef
+-   Flag instances where `forwardRef` is used but no longer needed in React 19
+-   Suggest replacing `forwardRef` with passing `ref` as a prop
+-   Help you modernize your codebase before `forwardRef` is deprecated in a future release
 
-## Key takeaways
-
--   Use composition and props when possible
--   Leverage React's built-in hooks for imperative actions
--   Consider state management for complex component interactions
--   Use the Context API for deeply nested component communication
--   Only reach for forwardRef when absolutely necessary (e.g., for library components)
+The rule even comes with an **automatic codemod** to help you migrate your codebase!
